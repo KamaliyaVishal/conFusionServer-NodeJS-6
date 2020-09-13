@@ -44,65 +44,37 @@ app.use(session({
   store: new FileStore()
 }));
 
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
 //Authorization START
 
 function auth(req, res, next) {
+  console.log(req.session);
 
-  //First Time gofor set Cookies
-  //if (!req.signedCookies.user) {
-
-  //First Time gofor set Session
   if (!req.session.user) {
-    var authHeader = req.headers.authorization;
-    if (!authHeader) {
-      var err = new Error('You are not authorized person!');
-      res.setHeader('WWW-Authenticate', 'Basic');
-      err.status = 401;
-      next(err);
-      return;
-    }
-
-    var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
-    var user = auth[0];
-    var pass = auth[1];
-
-    if (user == 'admin' && pass == 'admin') {
-      //set Cookie
-      //res.cookie('user', 'admin', { signed: true });
-
-      //Set Session
-      req.session.user = 'admin';
-      next();
-    } else {
-      var err = new Error('You are not authenticated!');
-      res.setHeader('WWW-Authenticate', 'Basic');
-      err.status = 401;
-      next(err);
-    }
-  } else {
-    //Skip authentication is Coolies already set
-    //if (req.signedCookies.user === 'admin') {
-
-    //Skip authentication is Session already set
-    if (req.session.user === 'admin') {
+    var err = new Error('You are not authenticated!');
+    err.status = 403;
+    return next(err);
+  }
+  else {
+    if (req.session.user === 'authenticated') {
       next();
     }
     else {
       var err = new Error('You are not authenticated!');
-      err.status = 401;
-      next(err);
+      err.status = 403;
+      return next(err);
     }
   }
 }
+
 
 app.use(auth);
 //Authorization END
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/dishes', dishRouter);
 app.use('/promotions', promoRouter);
 app.use('/leaders', leaderRouter);
