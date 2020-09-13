@@ -1,0 +1,52 @@
+git init
+git status
+git add .
+git commit -m "Message"
+
+git remote add origin https://github.com/KamaliyaVishal/NodeJS.git
+=join local repo to Online Git Repositories 
+
+git remote set-url origin https://github.com/KamaliyaVishal/git-test.git
+=changing the path of origin to join local repo to Online Git Repositories
+
+git push -u origin master
+
+
+******************************************************************************
+
+npm init:
+	Add name, description and author, rest of stuff are blank/as it is
+	Add bellow command to package.json ubder "scripts"
+	"start": "node index"
+Write code in index.js
+npm start
+
+
+#__Oneof the Most Use NodeJS Framework
+D:\Workspaces\NodeJS\node-express>npm install express@4.16.3 --save
+
+#__Loggger for Developer 
+D:\Workspaces\NodeJS\node-express>npm install morgan@1.9.0 --save
+
+#__Parsing JSON Format
+D:\Workspaces\NodeJS\node-express>npm install body-parser@1.18.3 --save
+
+#Install MongoDB and MongoDB Compass(GUI for MongoDB)
+
+Create: 'mongodb' Directory
+#__start the MongoDB server 
+#Set MongoDB Path to enviroment C:\Program Files\MongoDB\Server\4.4\bin
+D:\Workspaces\NodeJS\mongodb>mongod --dbpath=data --bind_ip 192.168.0.101
+
+Create: 'node-mongo' Directory
+#__Node MongoDB driver and the Assert module
+D:\Workspaces\NodeJS\node-mongo>npm install mongodb@3.0.10 --save
+D:\Workspaces\NodeJS\node-mongo>npm install assert@1.4.1 --save
+
+Create: 'node-mongoose' Directory
+#__Mongoose ODM and creating schemas
+D:\Workspaces\NodeJS\node-mongoose>npm install mongoose@5.1.7 --save
+
+Goto: 'conFusionServer' Directory
+D:\Workspaces\NodeJS\conFusionServer>npm install mongoose@5.1.7 mongoose-currency@0.2.0 --save,
+D:\Workspaces\NodeJS\conFusionServer>npm install express-session@1.15.6 session-file-store@1.2.0 --save
